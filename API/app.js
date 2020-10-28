@@ -36,6 +36,11 @@ app.use(users);
 // Bring in the Decks route
 const decks = require('./routes/decks');
 app.use(decks);
+
+// Bring in the cards route
+const cards = require('./routes/cards');
+app.use(cards);
+
 const cardList = async (req,res, color) => {
     color = 'w';
     const whiteCards = await fetch(`https://api.scryfall.com/cards/search?order=color&q=c%3A${color}`)

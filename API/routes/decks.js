@@ -15,7 +15,7 @@ router.post('/api/users/:userid/decks', decksController.create);
 // });
 
 // Update Deck by id
-router.put('/api/decks/:deckid/card/:cardid', decksController.addCardToDeck);
+router.put('/api/decks/:deckid/card', decksController.addCardToDeck);
 // router.put('/api/decks/:deckid/card/:cardid', decksController.deleteCardFromDeck);
 // // Delete Deck by id
 // router.delete('/api/decks/:deckid', decksController.delete);
