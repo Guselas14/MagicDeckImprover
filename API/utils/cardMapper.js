@@ -32,7 +32,7 @@ const cardsEx = {
     },
     {
       cardId: "73a44759-1fa4-4a96-b668-316851e8a35a",
-      name: "Abundance",
+      name: "Aboroth",
       lang: "en",
       image_uris: {
         small:
@@ -81,10 +81,11 @@ const cardMapper = (cardsExtended) => {
 const checkRepeatedCards = (name, data) => {
   const cards = data.cards;
   return cards.find((card) => {
-    return card.name === name;
+    return (card.name === name) ? true: false;
   });
 };
 
+console.log(checkRepeatedCards('Aboroth',cardsEx));
 // console.log(checkRepeatedCards('Aboroth',cardsEx));
 //#region UnExported Functions
 

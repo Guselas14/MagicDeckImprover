@@ -34,24 +34,39 @@ decksController.create = async (req, res) => {
 
 decksController.addCardToDeck = async (req, res) => {
   // try {
-    const card = req.body;
+    const cardToAdd = req.body;
     const deckId = req.params.deckid;
-    const deck = await Deck.findById(deckId);
-console.log(deck);
-    if (deck) {
-      if(deck.cards.length > 0 && checkRepeatedCards(card.name, deck)){
-        const x = checkRepeatedCards(card.name, deck);
-        x.quantity ++ ;
-        await deck.save(x.quantity++);
+    const userDeck = await Deck.findById(deckId);
+    if (userDeck) {
+      if(userDeck.cards.length > 0 && checkRepeatedCards(cardToAdd.name, userDeck)){
+        console.log('OSOSO:', cardToAdd.name);
+        for(let cardName of userDeck.cards){
+          console.log('ververv', cardName.name, userDeck.cards);
+          if(cardName.name === userDeck.cards.name){
+            console.log('CardNamemem',cardName.name);
+
+          }
+        }
+        // userDeck.cards.forEach((card)=>{console.log(card.name});
+        // userDeck.cards.forEach((card2)=>{ 
+        //   let selectedCard = card2.name == userDeck.name;
+        //   console.log('Bastian', selectedCard);
+
+        // });
+        
+        // const repeatedCards = checkRepeatedCards(userDeck.name, userDeck);
+        // const card = repeatedCards;
+        // userDeck.cards[card].quantity ++ ;
+        // await userDeck.save();
       }
       else{
-        card.quantity = 1;
-        deck.cards.push(card);
-        await deck.save();
+        repeatedCards.quantity = 1;
+        userDeck.cards.push(card);
+        await userDeck.save();
       }
 
       // await deck.save();
-      res.status(200).send({ msg: "deck updated", data: deck });
+      res.status(200).send({ msg: "deck updated", data: userDeck });
     } else {
       res.status(400).send("Couldn't update your deck");
     }
