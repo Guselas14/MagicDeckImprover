@@ -1,6 +1,6 @@
 const Deck = require("../models/Decks");
 const User = require("../models/Users");
-const { checkRepeatedCards } = require('../utils/cardMapper');
+const { checkRepeatedCardsByName, checkRepeatedCardsById } = require("../utils/cardMapper");
 const decksController = {};
 
 // Create Deck
@@ -31,48 +31,101 @@ decksController.create = async (req, res) => {
     res.status(500).send("Server error", error);
   }
 };
+// Delete Deck
 
+decksController.delete = async (req, res) =>{
+  const deckId = req.params.deckid;
+  try {
+    const deck =  await Deck.findByIdAndDelete(deckId);
+    if(deck){
+      res.status(202).send({msg: 'Deck deleted correctly'})
+    }
+    else{
+      res.status(404).send({msg: 'Deck not found'})
+    }
+  } catch (error) {
+    res.status(500).send({msg: "Server error", error});
+  }
+};
+// Add card to deck
 decksController.addCardToDeck = async (req, res) => {
-  // try {
+  try {
     const cardToAdd = req.body;
     const deckId = req.params.deckid;
     const userDeck = await Deck.findById(deckId);
     if (userDeck) {
-      if(userDeck.cards.length > 0 && checkRepeatedCards(cardToAdd.name, userDeck)){
-        console.log('OSOSO:', cardToAdd.name);
-        for(let cardName of userDeck.cards){
-          console.log('ververv', cardName.name, userDeck.cards);
-          if(cardName.name === userDeck.cards.name){
-            console.log('CardNamemem',cardName.name);
-
+      if (userDeck.cards.length > 0) {
+        const cardFound = checkRepeatedCardsByName(cardToAdd.name, userDeck);
+        console.log("cardFound", cardFound);
+        if (cardFound !== -1) {
+          let selectedCard = userDeck.cards[cardFound];
+          console.log("TENGO UNA CARTA REPETIDA");
+          if (selectedCard.quantity <= 3) {
+            selectedCard.quantity += 1;
+            await userDeck.save();
+            res.status(200).send({ msg: "deck updated", data: userDeck });
+          } else {
+            res.status(403).send({ msg: "Cannot have more than 4 same cards" });
           }
+        } else {
+          console.log("NO DEBO ENTRAR!");
+          cardToAdd.quantity = 1;
+          userDeck.cards.push(cardToAdd);
+          await userDeck.save();
+          res.status(200).send({ msg: "deck updated", data: userDeck });
         }
-        // userDeck.cards.forEach((card)=>{console.log(card.name});
-        // userDeck.cards.forEach((card2)=>{ 
-        //   let selectedCard = card2.name == userDeck.name;
-        //   console.log('Bastian', selectedCard);
-
-        // });
-        
-        // const repeatedCards = checkRepeatedCards(userDeck.name, userDeck);
-        // const card = repeatedCards;
-        // userDeck.cards[card].quantity ++ ;
-        // await userDeck.save();
-      }
-      else{
-        repeatedCards.quantity = 1;
-        userDeck.cards.push(card);
+      } else {
+        console.log("ENTOR SOLO 1 VEZ");
+        cardToAdd.quantity = 1;
+        userDeck.cards.push(cardToAdd);
         await userDeck.save();
       }
+      res.status(200).send({ msg: "deck updated (card added)", data: userDeck });
+    } else {
+      res.status(400).send("Couldn't update your deck");
+    }
+  } catch (error) {
+    res.status(500).send({msg: "Server error", error});
+  }
+};
 
-      // await deck.save();
+
+// Delete card to deck
+decksController.deleteCardFromDeck = async (req, res) => {
+  try {
+    const cardRemove = req.params.cardid;
+    const deckId = req.params.deckid;
+    const userDeck = await Deck.findById(deckId);
+    if (userDeck) {
+      if (userDeck.cards.length > 0) {
+        const cardFound = checkRepeatedCardsById(cardRemove, userDeck);
+        console.log("cardFound", cardFound);
+        if (cardFound !== -1) {
+          let selectedCard = userDeck.cards[cardFound];
+          console.log("TENGO UNA CARTA REPETIDA");
+            selectedCard.quantity -= 1;
+            await userDeck.save();
+            res.status(200).send({ msg: "deck updated (card deleted)", data: userDeck });
+        } else {
+          console.log("NO DEBO ENTRAR!");
+          cardToAdd.quantity = 1;
+          userDeck.cards.push(cardToAdd);
+          await userDeck.save();
+          res.status(200).send({ msg: "deck updated", data: userDeck });
+        }
+      } else {
+        console.log("ENTOR SOLO 1 VEZ");
+        cardToAdd.quantity = 1;
+        userDeck.cards.push(cardToAdd);
+        await userDeck.save();
+      }
       res.status(200).send({ msg: "deck updated", data: userDeck });
     } else {
       res.status(400).send("Couldn't update your deck");
     }
-  // } catch (error) {
-  //   res.status(500).send("Server error", error);
-  // }
+  } catch (error) {
+    res.status(500).send({msg: "Server error", error});
+  }
 };
 
 module.exports = decksController;

@@ -16,8 +16,10 @@ router.post('/api/users/:userid/decks', decksController.create);
 
 // Update Deck by id
 router.put('/api/decks/:deckid/card', decksController.addCardToDeck);
-// router.put('/api/decks/:deckid/card/:cardid', decksController.deleteCardFromDeck);
+router.put('/api/decks/:deckid/card/:cardid', decksController.deleteCardFromDeck);
 // // Delete Deck by id
-// router.delete('/api/decks/:deckid', decksController.delete);
+router.delete('/api/decks/:deckid', decksController.delete);
+
+
 
 module.exports = router;

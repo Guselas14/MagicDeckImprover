@@ -4,7 +4,7 @@ const CardSchema = require('./Cards');
 
 const DeckSchema = new Schema({
     title: {type: String, require: true },
-    cards: {type: Array},
+    cards: [CardSchema],
     cardsNumber: { type: Number},
     userId: {type: String}
 });

@@ -6,7 +6,7 @@ const cardsEx = {
   cards: [
     {
       cardId: "8c72ac67-e4fb-49a1-b1e5-cd2e414bec28",
-      name: "Aboroth",
+      name: "CANCER",
       lang: "en",
       image_uris: {
         small:
@@ -78,14 +78,15 @@ const cardMapper = (cardsExtended) => {
   };
 };
 
-const checkRepeatedCards = (name, data) => {
+const checkRepeatedCardsByName = (name, data) => {
   const cards = data.cards;
-  return cards.find((card) => {
-    return (card.name === name) ? true: false;
-  });
+  const index = cards.findIndex(card => card.name === name);
+  return index;
 };
 
-console.log(checkRepeatedCards('Aboroth',cardsEx));
+const checkRepeatedCardsById = (id, data) => data.cards.findIndex(card => card.id === id);
+
+// console.log(checkRepeatedCards('CANCER',cardsEx));
 // console.log(checkRepeatedCards('Aboroth',cardsEx));
 //#region UnExported Functions
 
@@ -113,4 +114,4 @@ const cardFilter = (cardsExtended) => {
 };
 //#endregion
 
-module.exports = { cardMapper, checkRepeatedCards };
+module.exports = { cardMapper, checkRepeatedCardsByName, checkRepeatedCardsById };

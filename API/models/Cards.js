@@ -22,5 +22,5 @@ const CardSchema = new Schema({
         tix:{type: String || null}
     },
 });
-
-module.exports = mongoose.model('CardSchema', CardSchema);
+module.exports = CardSchema;
+// module.exports = {mongoose.model('CardSchema', CardSchema),CardSchema};
