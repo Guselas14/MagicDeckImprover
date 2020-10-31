@@ -16,6 +16,28 @@ scryfallClient.getCardsByColor = async (color) =>{
     };
 };
 
+scryfallClient.getPossibleCardsByName = async (name) =>{
+    const posibleCards = await fetch(`https://api.scryfall.com/cards/autocomplete?q=${name}`)
+    .then(response => response.json())
+    .catch(error => console.log(error));
+    return {
+        total_values: posibleCards.total_values,
+        data: posibleCards.data,
+    };
+};
 
+scryfallClient.getCardByExactName = async (exactName) =>{
+    const card = await fetch(`https://api.scryfall.com/cards/named?exact=${exactName}`)
+    .then(response => response.json())
+    .catch(error => console.log(error));
+    console.log('cardFromScry:', card);
+    return {
+        cardId: card.id,
+        name: card.name,
+        lang: card.lang,
+        image_uris: card.image_uris,
+        prices: card.prices
+    };
+};
 
 module.exports =  scryfallClient;

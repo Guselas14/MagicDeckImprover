@@ -84,7 +84,8 @@ const checkRepeatedCardsByName = (name, data) => {
   return index;
 };
 
-const checkRepeatedCardsById = (id, data) => data.cards.findIndex(card => card.id === id);
+const checkRepeatedCardsById = (id, data) => data.cards.findIndex(card => card.cardId === id);
+
 
 // console.log(checkRepeatedCards('CANCER',cardsEx));
 // console.log(checkRepeatedCards('Aboroth',cardsEx));
@@ -112,6 +113,12 @@ const cardFilter = (cardsExtended) => {
   });
   return cardsSimple;
 };
+
+
 //#endregion
 
-module.exports = { cardMapper, checkRepeatedCardsByName, checkRepeatedCardsById };
+module.exports = { 
+  cardMapper, 
+  checkRepeatedCardsByName, 
+  checkRepeatedCardsById, 
+};
