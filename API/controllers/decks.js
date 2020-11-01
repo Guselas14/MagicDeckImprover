@@ -31,7 +31,7 @@ decksController.create = async (req, res) => {
           cards: [],
         });
         await newDeck.save();
-        res.status(201).send(`deck ${title} created`);
+        res.status(201).send(`deck: ${title} created`);
       }
     } else {
       res.status(404).send("user not found");

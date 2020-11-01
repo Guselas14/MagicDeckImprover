@@ -1,0 +1,16 @@
+.mydecks_card_title{
+    text-align: center;
+}
+
+.home_icon{
+    color: white;
+}
+
+.deck_img{
+    width: 100%;
+}
+
+.deck_img:hover{
+    width: 103%;
+    margin-right: 10px;
+}
