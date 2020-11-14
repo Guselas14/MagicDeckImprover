@@ -14,24 +14,24 @@
 
 <body>
   <div>
-  <div class="row">
-    <div class="col-md-8" style="background-color: blue; text-align: center;">
+    <div class="row editDeck_main_row">
+      <!-- ZONA DE CARDS QUERY -->
+    <div class="col-md-8 bg-dark">
       <div class="editDeck_home_icon">
       </div>
       <div class="editDeck_navBar">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-backspace-fill " fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg">
+          
           <a href="../myDecks/index.html">
-          <path fill-rule="evenodd"
-            d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z" />
-        </svg>
+            <i id="editDeck_back_btn" class="fas fa-arrow-alt-circle-left"></i>
+          </a>
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarColor02">
             <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Card Searcher">
+              <input id="cardSearcher" class="form-control mr-sm-2" type="text" placeholder="Card Searcher">
             </form>
             <ul class="navbar-nav mr-auto">
               <li>
@@ -60,13 +60,12 @@
                 </button>
               </li>
             </ul>
-            <h3 class="editDeck_title">EDIT DECK</h3>
           </div>
         </nav>
       </div>
-      <div class="test">
+      <div class="editDeck_cards_result_container">
         <div id="leftArrowContainer" class="hide-arrow">
-          <i class="fas fa-arrow-left"></i>
+          <i class="fas fa-arrow-left arrows"></i>
         </div>
         <div class="">
           <!-- CARD IMAGES RESULTS-->
@@ -74,52 +73,39 @@
           </div>
         </div>
         <div id="rightArrowContainer" class="">
-          <i class="fas fa-arrow-right"></i>
+          <i class="fas fa-arrow-right arrows"></i>
         </div>
     </div>
     </div>
-    <div class="col-md-4" style="background-color: green;">
+    <!-- FIN ZONA CARDS QUERY -->
+    <!-- ZONA EDIT DECK -->
+    <div class="col-md-4 bg-dark">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Deck Title">
-      </div>      <div class="card">
+        <input type="text" id="deckTitle" class="form-control" placeholder="Deck Title">
+      </div>     
+       <div class="card">
         <div class="card-header">
           <div class="row">
-            <div class="col-md-6 editDeck_deck_sideboard">
-              <span>
-                DECK (59/60)
+            <div class="col-md-6 editDeck_deck_sideboard bg-dark">
+              <span id="deckNumberCards">                
               </span>
             </div>
-            <div class="col-md-6 editDeck_deck_sideboard">
-              <span>
-                SIDEBOARD (15/15)
+            <div class="col-md-6 editDeck_deck_sideboard bg-dark">
+              <span id="deckSideBoardCards">                
               </span>
             </div>
           </div>
         </div>
         <div class="card-body">
-              <div class="editDeck_deck_item_card_list">
-                <div class="row">
-                  <div class="col-md-2">
-                    <span>3X</span>
-                  </div>
-                  <div class="col-md-5">
-                    <span>SACRED BLESS</span>
-                  </div>
-                  <div class="col-md-2">
-                    <span>5$</span>
-                  </div>
-                  <div class="col-md-2">
-                    <i class="fas fa-plus-square"></i>  <i class="fas fa-minus-square"></i>
-                  </div>
-
-                </div>
+              <div id="userDeckContent" class="editDeck_deck_item_card_list">
                 </div>
         </div>
         <div class="card-footer">
-          <h3>DECK PRICE</h3>
+          <h3 id="deckPrice"></h3>
         </div>
       </div>
     </div>
+    <!-- FIN ZONA EDIT DECK -->
   </div>
   <div class="card text-white bg-dark">
   </div>

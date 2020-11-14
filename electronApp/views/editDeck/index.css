@@ -1,15 +1,27 @@
+.editDeck_main_row{
+height: 802px;
+width: 1455px;
+}
+
 .editDeck_mana_color_icon_filters {
   width: 40px;
   /* margin-right: 10px;
     margin-left: 10px; */
 }
+
+.editDeck_cards_results{
+  margin-top: 30px;
+  margin-left: 30px;
+}
 .editDeck_home_icon {
   display: flex;
 }
 
-.editDeck_title {
-  margin-left: 375px;
+#cardSearcher{
+  margin-left: 10px;
+  width: 300px;
 }
+
 .editDeck_card_found {
   width: 200px;
 }
@@ -32,23 +44,41 @@
 }
 
 .editDeck_deck_sideboard {
-  background-color: violet;
   border-radius: 6px;
   text-align: center;
-}
-
-.editDeck_deck_sideboard:hover {
-  background-color: yellow;
 }
 
 .fas{
   font-size: 50px;
 }
+.arrows{
+  margin-top: 290px;
+}
 
-.test{
+.editDeck_cards_result_container{
   display: flex;
+  margin-left: 5px;
 }
 .hide-arrow{
   /* color: blue; */
   display: none;
 }
+.amount-icon{
+  font-size: 24px;
+}
+
+#deckTitle{
+  text-align: center;
+  font-size: 30px;
+}
+.card-footer{
+  text-align: center;
+}
+
+.user_card_content{
+  background-color: lightgrey;
+  padding-top: 5px;
+  margin-bottom: 3px;
+  border-radius: 3px;
+}
+

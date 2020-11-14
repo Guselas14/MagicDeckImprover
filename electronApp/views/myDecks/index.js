@@ -22,6 +22,9 @@ const printDeck = (deck) => {
   const cardDeckLink = document.createElement("a");
   cardDeckLink.setAttribute("href", "../editDeck/index.html");
   const cardDeckImage = document.createElement("img");
+  cardDeckImage.setAttribute('onclick', 'saveDeckLS(event)')
+  cardDeckImage.setAttribute('id', deck._id)
+
   setDeckImg(cardDeckImage,deck);
   const cardDeckPrice = document.createElement("h3");
   cardDeckPrice.textContent = "600$";
@@ -58,4 +61,11 @@ const setDeckImg = (nodeImg, deck) => {
   nodeImg.setAttribute("alt", "default");
   nodeImg.setAttribute("class", "deck_img");
 
+};
+
+
+const saveDeckLS = (event)=>{
+const deckId = event.target.id;
+const selectedDeck = decks.find((deck)=>deck._id === deckId);
+localStorage.setItem('selectedDeck', JSON.stringify(selectedDeck));
 };
