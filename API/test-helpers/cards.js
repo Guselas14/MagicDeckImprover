@@ -280,8 +280,26 @@ const scryfallCardSearchByColorErrorMessage = {
     "details": "Your query didn’t match any cards. Adjust your search terms or refer to the syntax guide at https://scryfall.com/docs/reference"
   };
 
+const mockRequest ={
+    params:{
+        color:'black'
+    }
+}
+const mockResponse ={
+     status: (code)=>{
+         expect(code).toEqual(200);
+         return this;
+     },
+     send: (obj)=>{
+         expect(obj.msg).toEqual(`color serach (${mockRequest.params.color}) :`);
+         expect(obj.filteredCards).toEqual(whiteCardsFiltered);
+     }
+}
+
 module.exports = {
   whiteCardsExtended,
   whiteCardsFiltered,
   scryfallCardSearchByColorErrorMessage,
+  mockRequest,
+  mockResponse
 };

@@ -11,7 +11,7 @@ const CardSchema = new Schema({
         small: {type: String, require:true},
         normal: {type: String, require:true},
         large: {type: String, require:true},
-        avatar: {type: String, require:true},
+        art_crop: {type: String, require:true},
         border_crop: {type: String, require:true},
     },
     prices:{

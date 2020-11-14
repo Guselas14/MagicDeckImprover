@@ -6,9 +6,8 @@ const cardsController = {};
 // GET CARDS BY COLOR
 cardsController.getCardsByColor = async (req, res) => {
   const color = req.params.color;
-  const cards = await scryfallClient.getCardsByColor(color);
-  console.log('cards from scryfallClient', cards);
   try {
+    const cards = await scryfallClient.getCardsByColor(color);
     if (cards && cards.data) {
       const filteredCards = cardMapper(cards);
       res.status(200).send({ msg: `color serach (${color}) :`, filteredCards });
@@ -23,7 +22,7 @@ cardsController.getCardsByColor = async (req, res) => {
 cardsController.getPossibleCardsByName = async (req, res) => {
   const cardSearchName = req.params.name;
   const cards = await scryfallClient.getPossibleCardsByName(cardSearchName);
-  if (cards && cards.data) {
+  if (cards && cards.catalog) {
     res.status(200).send({
         msg: "Posible cards",
         total: cards.total_values,
@@ -35,10 +34,11 @@ cardsController.getPossibleCardsByName = async (req, res) => {
 };
 
 cardsController.getCardByExactName = async (req, res) => {
-  const cardSearchName = req.params.name;
+  const cardSearchName = req.query.q;
+  console.log('cardSearchName',cardSearchName);
   const card = await scryfallClient.getCardByExactName(cardSearchName);
-  if (card && cards.data) {
-    console.log("cardCONTROLLER:", card);
+  console.log('PEPE',card);
+  if (card) {
     res.status(200).send({ msg: "card by exact name", card: card });
   } else {
     res.status(206).send({msg:"No cards found"});

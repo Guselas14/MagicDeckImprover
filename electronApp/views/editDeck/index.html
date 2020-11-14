@@ -1,12 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css" />
+  <script src="https://kit.fontawesome.com/1636d5c31c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css" />
 </head>
+
 <body>
-    <h1>HOLA MAGICS</h1>
-    
+  <div>
+  <div class="row">
+    <div class="col-md-8" style="background-color: blue; text-align: center;">
+      <div class="editDeck_home_icon">
+      </div>
+      <div class="editDeck_navBar">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-backspace-fill " fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <a href="../myDecks/index.html">
+          <path fill-rule="evenodd"
+            d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z" />
+        </svg>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Card Searcher">
+            </form>
+            <ul class="navbar-nav mr-auto">
+              <li>
+                <button>
+                <img src="../../../assets/images/whiteManaColor.png" class="editDeck_mana_color_icon_filters" alt="">
+              </button>
+              </li>
+              <li>
+                <button>
+                <img src="../../../assets/images/BlueManaColor.png"class="editDeck_mana_color_icon_filters" alt="">
+                </button>
+              </li>
+              <li>
+                <button>
+                <img src="../../../assets/images/BlackManaColor.png" class="editDeck_mana_color_icon_filters"alt="">
+                </button>
+              </li>
+              <li>
+                <button>
+                <img src="../../../assets/images/RedManaColor.png" class="editDeck_mana_color_icon_filters"alt="">
+                </button>
+              </li>
+              <li>
+                <button>
+                <img src="../../../assets/images/GreenManaColor.png"class="editDeck_mana_color_icon_filters" alt="">
+                </button>
+              </li>
+            </ul>
+            <h3 class="editDeck_title">EDIT DECK</h3>
+          </div>
+        </nav>
+      </div>
+      <div class="test">
+        <div id="leftArrowContainer" class="hide-arrow">
+          <i class="fas fa-arrow-left" onclick="previousCardPage(event)"></i>
+        </div>
+        <div class="">
+          <!-- CARD IMAGES RESULTS-->
+          <div class="editDeck_cards_results">
+          </div>
+        </div>
+        <div class="">
+          <i class="fas fa-arrow-right" onclick="nextCardPage()"></i>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-4" style="background-color: green;">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Deck Title">
+      </div>      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6 editDeck_deck_sideboard">
+              <span>                
+                DECK (59/60)
+              </span>
+            </div>
+            <div class="col-md-6 editDeck_deck_sideboard">
+              <span>                
+                SIDEBOARD (15/15)
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+              <div class="editDeck_deck_item_card_list">
+                <div class="row">
+                  <div class="col-md-2">
+                    <span>3X</span>
+                  </div>
+                  <div class="col-md-5">
+                    <span>SACRED BLESS</span>
+                  </div>
+                  <div class="col-md-2">
+                    <span>5$</span>
+                  </div>
+                  <div class="col-md-2">
+                    <i class="fas fa-plus-square"></i>  <i class="fas fa-minus-square"></i>                  
+                  </div>
+
+                </div>
+                </div>
+        </div>
+        <div class="card-footer">
+          <h3>DECK PRICE</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card text-white bg-dark">
+  </div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
 </body>
+
 </html>

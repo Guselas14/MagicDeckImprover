@@ -1,0 +1,6 @@
+1- Logica de MyDecks sumatorio precio baraja FRONT
+2- LOGIN BACK + FRONT
+3- Refactor de printDeck()
+4- Cahnge icons to Font awesome
+5- Make API EditDeckTitle
+6- BACK make logic to request another 175 cards to scryfall

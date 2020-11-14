@@ -12,6 +12,25 @@ const {
 //#endregion
 const decksController = {};
 
+// Get Decks
+decksController.getDecks = async (req, res )=>{
+  const userId = req.params.userid;
+  const user = await User.findById(req.params.userid);
+
+  try {
+    if(user){
+      const decks = await Deck.find({ userId });
+      if(decks){
+        res.status(200).send({msg:'Decks founds', decks})
+      }
+      else{
+        res.status(404).send({msg:'No Decks founds'})
+      }
+    }
+  } catch (error) {
+    res.status(500).send("Server error", error);
+  }
+}
 // Create Deck
 decksController.create = async (req, res) => {
   let { title } = req.body;
@@ -29,6 +48,8 @@ decksController.create = async (req, res) => {
           title,
           userId: user._id,
           cards: [],
+          cardsNumber: 0,
+          deckPrice: 0
         });
         await newDeck.save();
         res.status(201).send(`deck: ${title} created`);
@@ -56,41 +77,7 @@ decksController.delete = async (req, res) => {
   }
 };
 
-//#region BEFORE COFEE
 // Add card to deck
-// decksController.addCardToDeck = async (req, res) => {
-//   try {
-//     const cardToAdd = req.body;
-//     const deckId = req.params.deckid;
-//     const userDeck = await Deck.findById(deckId);
-//     if (userDeck) {
-//         const cardFound = checkRepeatedCardsByName(cardToAdd.name, userDeck);
-//         if (cardFound !== -1) {
-//           let selectedCard = userDeck.cards[cardFound];
-//           if (selectedCard.quantity <= 3) {
-//             selectedCard.quantity += 1;
-//             await userDeck.save();
-//             res.status(200).send({ msg: "deck updated", data: userDeck });
-//           } else {
-//             res.status(403).send({ msg: "Cannot have more than 4 same cards" });
-//           }
-//         } else {
-//           cardToAdd.quantity = 1;
-//           userDeck.cards.push(cardToAdd);
-//           await userDeck.save();
-//           res.status(200).send({ msg: "deck updated", data: userDeck });
-//         }
-//       res.status(200).send({ msg: "deck updated (card added)", data: userDeck });
-//     } else {
-//       res.status(400).send("Couldn't update your deck");
-//     }
-//   } catch (error) {
-//     res.status(500).send({ msg: "Server error", error });
-//   }
-// };
-
-//AFTER COFFEE
-//#endregion
 decksController.addCardToDeck = async (req, res) => {
   try {
     const cardToAdd = req.body;

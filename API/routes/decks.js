@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const decksController = require('../controllers/decks');
 
+
+// Get Decks
+router.get('/api/users/:userid/decks', decksController.getDecks);
+
 // Create Deck
 router.post('/api/users/:userid/decks', decksController.create);
 
