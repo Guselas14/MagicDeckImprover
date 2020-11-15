@@ -2,6 +2,8 @@ const axios = require("axios");
 const uri = "http://localhost:3000";
 
 const apiCaller = {};
+const userDeckFromLS = JSON.parse(localStorage.getItem("selectedDeck"));
+const deckId = userDeckFromLS._id;
 
 apiCaller.getCardsByColor = async (color) => {
   let cards;
@@ -21,6 +23,52 @@ apiCaller.getCardsByColor = async (color) => {
   }
   return apiGetCardsByColor;
 };
-apiCaller.getCardsByColor("white");
+
+apiCaller.newDeck = async (userId, deckTitle) => {
+  const aux = await axios({
+    method: "post",
+    url: `${uri}/api/users/${userId}/decks`,
+    headers: {},
+    data: {
+      title: deckTitle,
+    },
+  });
+  return aux;
+};
+
+apiCaller.getCardsByName = async (name) => {
+  const aux = await axios({
+    method: "get",
+    url: `${uri}/api/cardsbyname/${name}`,
+    headers: {},
+  });
+  return aux;
+};
+
+apiCaller.getCardsByExactName = async (name) => {
+  const aux = await axios({
+    method: "get",
+    url: `${uri}/api/cardsbyexactname?q=${name}`,
+    headers: {},
+  });
+  return aux;
+};
+
+apiCaller.addCardToDeck = async (card) => {
+  console.log(deckId);
+  const aux = await axios({
+    method: "put",
+    url: `${uri}/api/decks/${deckId}/card`,
+    headers: {},
+    data: {
+      cardId: card.cardId,
+      name: card.name,
+      lang: card.lang,
+      image_uris: card.image_uris,
+      prices: card.prices,
+    },
+  });
+  return aux;
+};
 
 module.exports = apiCaller;

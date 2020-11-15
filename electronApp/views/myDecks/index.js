@@ -43,7 +43,6 @@ const printDeck = (deck) => {
 };
 
 const printDecks = (decks) => {
-  console.log("decks", decks);
   const myDecksList = document.querySelector(".myDecks_list");
   let cardDeck;
   decks.forEach((deck) => {

@@ -31,31 +31,33 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarColor02">
             <form class="form-inline my-2 my-lg-0">
-              <input id="cardSearcher" class="form-control mr-sm-2" type="text" placeholder="Card Searcher">
+              <input id="cardSearcher" list='autocomplete' class="form-control mr-sm-2" type="text" placeholder="Card Searcher">
+              <datalist id="autocomplete">
+              </datalist>
             </form>
             <ul class="navbar-nav mr-auto">
               <li>
-                <button>
+                <button id="whiteFilterBtn">
                 <img src="../../../assets/images/whiteManaColor.png" class="editDeck_mana_color_icon_filters" alt="">
               </button>
               </li>
               <li>
-                <button>
+                <button id="blueFilterBtn">
                 <img src="../../../assets/images/BlueManaColor.png"class="editDeck_mana_color_icon_filters" alt="">
                 </button>
               </li>
               <li>
-                <button>
+                <button id="blackFilterBtn">
                 <img src="../../../assets/images/BlackManaColor.png" class="editDeck_mana_color_icon_filters"alt="">
                 </button>
               </li>
               <li>
-                <button>
+                <button id="redFilterBtn">
                 <img src="../../../assets/images/RedManaColor.png" class="editDeck_mana_color_icon_filters"alt="">
                 </button>
               </li>
               <li>
-                <button>
+                <button id="greenFilterBtn">
                 <img src="../../../assets/images/GreenManaColor.png"class="editDeck_mana_color_icon_filters" alt="">
                 </button>
               </li>
@@ -69,7 +71,7 @@
         </div>
         <div class="">
           <!-- CARD IMAGES RESULTS-->
-          <div class="editDeck_cards_results">
+          <div class="editDeck_cards_results" ondrop="drop(event)" ondragover="allowDrop(event)">
           </div>
         </div>
         <div id="rightArrowContainer" class="">
@@ -97,7 +99,7 @@
           </div>
         </div>
         <div class="card-body">
-              <div id="userDeckContent" class="editDeck_deck_item_card_list">
+              <div id="userDeckContent" class="editDeck_deck_item_card_list" ondrop="drop(event)" ondragover="allowDrop(event)">
                 </div>
         </div>
         <div class="card-footer">
@@ -110,16 +112,17 @@
   <div class="card text-white bg-dark">
   </div>
 </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+  crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
     <script src="./index.js"></script>
+    <script src="./dragAndDrop.js"></script>
 </body>
 
 </html>

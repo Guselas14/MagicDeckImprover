@@ -5,19 +5,8 @@ const decksController = require('../controllers/decks');
 
 // Get Decks
 router.get('/api/users/:userid/decks', decksController.getDecks);
-
 // Create Deck
 router.post('/api/users/:userid/decks', decksController.create);
-
-// Get Deck by id
-// router.get('/api/decks/:deckid',async(req,res) =>{
-//     const deck = await Decks.findById(req.params.deckId);
-//     if(!deck) {
-//         res.status(400).json({success: false, msg: "Deck not found"})
-//     }
-//     res.status(200).json({success:true, deck})
-// });
-
 // Update Deck by id
 router.put('/api/decks/:deckid/card', decksController.addCardToDeck);
 router.put('/api/decks/:deckid/card/:cardid', decksController.deleteCardFromDeck);

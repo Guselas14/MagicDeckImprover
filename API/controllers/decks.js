@@ -28,7 +28,7 @@ decksController.getDecks = async (req, res )=>{
       }
     }
   } catch (error) {
-    res.status(500).send("Server error", error);
+    res.status(500).send({msg:"Server error", error});
   }
 }
 // Create Deck
@@ -42,7 +42,7 @@ decksController.create = async (req, res) => {
       if (deck) {
         res
           .status(409)
-          .send(`You already got a deck with this title: ${title}`);
+          .send({msg:`You already got a deck with this title: ${title}`});
       } else {
         const newDeck = new Deck({
           title,
@@ -52,13 +52,13 @@ decksController.create = async (req, res) => {
           deckPrice: 0
         });
         await newDeck.save();
-        res.status(201).send(`deck: ${title} created`);
+        res.status(201).send({msg:`deck: ${title} created`, data: newDeck});
       }
     } else {
-      res.status(404).send("user not found");
+      res.status(404).send({msg:"user not found"});
     }
   } catch (error) {
-    res.status(500).send("Server error", error);
+    res.status(500).send({msg:"Server error", error});
   }
 };
 // Delete Deck
@@ -89,7 +89,7 @@ decksController.addCardToDeck = async (req, res) => {
       await userDeck.save();
       res.status(aux.errCode).send({ msg: aux.msg, data: userDeck });
     } else {
-      res.status(400).send("Couldn't update your deck");
+      res.status(400).send({msg:"Couldn't update your deck"});
     }
   } catch (error) {
     res.status(500).send({ msg: "Server error", error });
@@ -108,7 +108,7 @@ decksController.deleteCardFromDeck = async (req, res) => {
       await userDeck.save();
       res.status(aux.errCode).send({ msg: aux.msg , userDeck});
     } else {
-      res.status(400).send("Couldn't update your deck");
+      res.status(400).send({msg:"Couldn't update your deck"});
     }
   } catch (error) {
     res.status(500).send({ msg: "Server error", error });
@@ -116,3 +116,6 @@ decksController.deleteCardFromDeck = async (req, res) => {
 };
 
 module.exports = decksController;
+
+
+

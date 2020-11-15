@@ -22,7 +22,7 @@ cardsController.getCardsByColor = async (req, res) => {
 cardsController.getPossibleCardsByName = async (req, res) => {
   const cardSearchName = req.params.name;
   const cards = await scryfallClient.getPossibleCardsByName(cardSearchName);
-  if (cards && cards.catalog) {
+  if (cards && cards.data.length > 0) {
     res.status(200).send({
         msg: "Posible cards",
         total: cards.total_values,
@@ -35,9 +35,7 @@ cardsController.getPossibleCardsByName = async (req, res) => {
 
 cardsController.getCardByExactName = async (req, res) => {
   const cardSearchName = req.query.q;
-  console.log('cardSearchName',cardSearchName);
   const card = await scryfallClient.getCardByExactName(cardSearchName);
-  console.log('PEPE',card);
   if (card) {
     res.status(200).send({ msg: "card by exact name", card: card });
   } else {
