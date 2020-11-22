@@ -2,8 +2,16 @@ const axios = require("axios");
 const uri = "http://localhost:3000";
 
 const apiCaller = {};
-const userDeckFromLS = JSON.parse(localStorage.getItem("selectedDeck"));
-const deckId = userDeckFromLS._id;
+
+
+apiCaller.getUserDecks = async (userId)=>{
+  const aux = await axios({
+    method: "get",
+    url: `${uri}/api/users/${userId}/decks`,
+    headers: {},
+  });
+  return aux;
+};
 
 apiCaller.getCardsByColor = async (color) => {
   let cards;
@@ -55,7 +63,8 @@ apiCaller.getCardsByExactName = async (name) => {
 };
 
 apiCaller.addCardToDeck = async (card) => {
-  console.log(deckId);
+  const userDeckFromLS = JSON.parse(localStorage.getItem("selectedDeck"));
+  const deckId = userDeckFromLS._id;
   const aux = await axios({
     method: "put",
     url: `${uri}/api/decks/${deckId}/card`,

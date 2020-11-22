@@ -4,10 +4,9 @@ const fetch = require("node-fetch");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-
-
 // Initialize the app
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 //Middlewares
 
@@ -41,6 +40,9 @@ app.use(decks);
 const cards = require('./routes/cards');
 app.use(cards);
 
+// app.get('/cards', cardList);
+
+
 const cardList = async (req,res, color) => {
     color = 'w';
     const whiteCards = await fetch(`https://api.scryfall.com/cards/search?order=color&q=c%3A${color}`)
@@ -48,15 +50,8 @@ const cardList = async (req,res, color) => {
     .then(data => console.log(data));
     res.send(whiteCards);
    };
- 
 
-app.get('/', function (req, res) {
-    res.send('Hello Wordl!')
-});
 
-const PORT = process.env.PORT || 3000;
-
-app.get('/cards', cardList);
 app.listen(PORT, () =>  {
   console.log(`App listening on port ${PORT}!`);
 });

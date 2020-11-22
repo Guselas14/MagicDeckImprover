@@ -27,7 +27,7 @@ const createHTMLContainers = () => {
   };
 };
 
-const createUserDeckContainers = (cnts) => {
+const setAttributesToContainers = (cnts) => {
   cnts.row.setAttribute("class", "row user_card_content");
   cnts.div1.setAttribute("class", "col-md-2");
   cnts.div2.setAttribute("class", "col-md-5");
@@ -39,8 +39,9 @@ const createContainersInfo = (cnts) => {
   cnts.spanCardAmount.setAttribute("class", "cardAmount");
   cnts.spanCardName.setAttribute("class", "cardName");
   cnts.spanCardPrice.setAttribute("class", "cardPrice");
-  cnts.plusIcon.setAttribute("class", "fas fa-plus-square amount-icon");
-  cnts.minusIcon.setAttribute("class", "fas fa-minus-square amount-icon");
+  //TODO: hacerlos funcionar
+  // cnts.plusIcon.setAttribute("class", "fas fa-plus-square amount-icon");
+  // cnts.minusIcon.setAttribute("class", "fas fa-minus-square amount-icon");
 };
 
 const insertDataIntoContainers = (cnts) => {
@@ -64,7 +65,7 @@ const setCardInfo = (cnts,card) => {
 
 const printUserDeckContent = (card) => {
    const cnts = createHTMLContainers();
-  createUserDeckContainers(cnts);
+   setAttributesToContainers(cnts);
   createContainersInfo(cnts);
   insertDataIntoContainers(cnts);
   setCardInfo(cnts,card);
@@ -76,7 +77,7 @@ const printUserDeckTitle = () => {
 };
 const printUserDeckCardsNumber = () => {
   const deckNumberCards = document.getElementById("deckNumberCards");
-  const totalNumberCardsDeck = userDeck ? userDeck.cards.length : 0;
+  const totalNumberCardsDeck = userDeck ? calculateTotalCardsDeck() : 0; //TODO: aprende a contar!!!
   deckNumberCards.innerText = `DECK (${totalNumberCardsDeck}/60)`;
 };
 const printUserDeckSideBoardNumber = () => {
@@ -90,7 +91,7 @@ const printUserDeckCards = () => {
 };
 const printUserDeckPrice = () => {
   const deckPrice = document.getElementById("deckPrice");
-  const deckPriceCalculated = calculateTotalDeckPrice();
+  const deckPriceCalculated = calculateTotalDeckPrice(userDeck);
   deckPrice.innerText = `DECK PRICE: ${deckPriceCalculated}€`;
 };
 
@@ -109,6 +110,15 @@ const printCardFound = (card)=>{
   cardsResultsContainer.appendChild(cardImg);
 };
 
+const calculateTotalCardsDeck = ()=>{
+  let deck = JSON.parse(localStorage.getItem('selectedDeck'));
+  let total = 0;
+  deck.cards.forEach((card) =>{
+    total += card.quantity;
+  });
+  return total;
+}
+
 const printUserDeck = () => {
   printUserDeckTitle();
   printUserDeckCardsNumber();
@@ -121,12 +131,13 @@ const printUserDeck = () => {
 
 module.exports = {
   createHTMLContainers,
-  createUserDeckContainers,
+  setAttributesToContainers,
   createContainersInfo,
   insertDataIntoContainers,
   setCardInfo,
   printUserDeck,
   printUserDeckCardsNumber,
   printDefaultView,
-  printCardFound
+  printCardFound,
+  printUserDeckCards
 };

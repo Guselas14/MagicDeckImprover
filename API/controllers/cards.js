@@ -10,7 +10,8 @@ cardsController.getCardsByColor = async (req, res) => {
     const cards = await scryfallClient.getCardsByColor(color);
     if (cards && cards.data) {
       const filteredCards = cardMapper(cards);
-      res.status(200).send({ msg: `color serach (${color}) :`, filteredCards });
+      res.status(200).send({ msg: `color serach (${color}) :`, filteredCards })
+      ;
     } else {
       res.status(206).send({msg:"No cards found"});
     }

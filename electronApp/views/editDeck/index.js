@@ -26,7 +26,7 @@ const greenFilterBtn = document.querySelector("#greenFilterBtn");
 
 let cards = [];
 
-//#region CREATE NEW DECK
+//#region DECKS
 const createNewDeck = async () => {
   const deckTitle = deckTitleInput.value;
   const userId = "5f945616c3ca8d2a0001cebd";
@@ -34,33 +34,7 @@ const createNewDeck = async () => {
   localStorage.setItem("selectedDeck", JSON.stringify(deck.data.data));
 };
 //#endregion
-//#region Aux
-const calculateTotalDeckPrice = () => {
-  let deckPrice = 0;
-  userDeck.cards.forEach((card) => {
-    deckPrice += Number(card.prices.eur);
-  });
-  return deckPrice;
-};
-
-function debouncer(delay, fn) {
-  let temporizador;
-  return function (...args) {
-    if (temporizador) {
-      clearTimeout(temporizador);
-    }
-    temporizador = setTimeout(() => {
-      fn(...args);
-      temporizador = null;
-    }, delay);
-  };
-}
-
-const clearLs = () => localStorage.clear();
-const haveDeckInLS = () => localStorage.getItem("selectedDeck");
-
-//#endregion
-
+//#region CARDS
 const getCards = () => {
   return apiCaller
     .getCardsByColor("white")
@@ -124,6 +98,34 @@ const getCardByName = () => {
       console.log(error);
     });
 };
+//#endregion
+//#region Aux Functions
+ const calculateTotalDeckPrice = (userDeck) => {
+  let deckPrice = 0;
+  userDeck.cards.forEach((card) => {
+    deckPrice += Number(card.prices.eur * card.quantity);
+  });
+  return deckPrice.toFixed(2);
+};
+
+function debouncer(delay, fn) {
+  let temporizador;
+  return function (...args) {
+    if (temporizador) {
+      clearTimeout(temporizador);
+    }
+    temporizador = setTimeout(() => {
+      fn(...args);
+      temporizador = null;
+    }, delay);
+  };
+}
+
+const clearLs = () => localStorage.clear();
+const haveDeckInLS = () => localStorage.getItem("selectedDeck");
+
+//#endregion
+
 
 (async () => {
   const haveWeDeck = haveDeckInLS();
@@ -168,3 +170,8 @@ const getCardByName = () => {
 
   goToNextPage();
 })();
+
+
+module.exports = {
+  calculateTotalDeckPrice,
+}

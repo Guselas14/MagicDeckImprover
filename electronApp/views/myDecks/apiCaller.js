@@ -13,6 +13,14 @@ apiCaller.getDecks = async (userId)=>{
         console.log("No tienes Decks!");
     }
 }
-//  apiCaller.getDecks('5f945616c3ca8d2a0001cebd');
+
+apiCaller.deleteDeck = async (deckId)=>{
+    const result = await axios.delete(`${uri}/api/decks/${deckId}`)
+    if(result){
+       console.log('Deck deleted!');
+    } else {
+        console.log('Unaible to delete deck!');
+    }
+}
 
  module.exports = apiCaller;
